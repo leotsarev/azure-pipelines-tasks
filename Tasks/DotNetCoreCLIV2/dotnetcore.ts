@@ -168,6 +168,11 @@ export class dotNetExe {
             dotnet.arg(this.command);
             dotnet.arg(projectFile);
             dotnet.line(this.arguments);
+            
+            if (tl.getBoolInput("nobuild")) {
+                dotnet.arg("--no-build");
+            }
+            
             try {
                 const result = await dotnet.exec(<tr.IExecOptions>{
                     cwd: this.workingDirectory
